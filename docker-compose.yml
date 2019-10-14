@@ -10,7 +10,7 @@ services:
       - ./jenkins-master:/var/jenkins_home
 
   worker:
-    image: eeacms/jenkins-slave
+    image: eeacms/jenkins-slave-dind
     environment:
       JAVA_OPTS: "-Xmx2048m"
       JENKINS_MASTER: "http://master:8080"
@@ -20,7 +20,4 @@ services:
       JENKINS_RETRY: "10"
     volumes:
       - ./jenkins-worker:/var/jenkins_home/worker
-
-#volumes:
-#  jenkins-master:./master
-#  jenkins-worker:
+      - /var/run/docker.sock:/var/run/docker.sock
